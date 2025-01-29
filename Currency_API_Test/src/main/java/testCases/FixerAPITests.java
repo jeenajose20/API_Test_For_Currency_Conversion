@@ -107,10 +107,16 @@ public class FixerAPITests {
 	    test.info("Response code:"+response.asString());
 	}
 	
+	public void validateInvalidKeyErrorcode(int errorCode) {
+		Assert.assertEquals(response.jsonPath().getInt("error.code"), errorCode, "Error code should match");
+		test.info("Error code:" + response.jsonPath().getInt("error.code"));
+	}
+	
 	public void validateInvalidAccesKeyErrorMessage(String expectedError) {
 		test.info("Expected Error: "+ expectedError);
 		System.out.println("Expected Error: "+ expectedError);
 		System.out.println(response.asString());
+		test.info("Error message: "+response.jsonPath().getString("error.info"));
 		Assert.assertTrue(response.asString().contains(expectedError), "Error message should contain: " + expectedError);
 		test.pass("Error message generated succesfully");
 	}
@@ -118,6 +124,7 @@ public class FixerAPITests {
 	public void validateInvalidSymbolsErrorMessage(String expectedErrorField) {
 		test.info("Response "+ response.asString());
 		Assert.assertTrue(response.asString().contains(expectedErrorField), "Error message should mention: " + expectedErrorField);
+		test.info("Error message: "+response.jsonPath().getString("error.info"));
 		test.pass("Error message generated succesfully");
 	}
 

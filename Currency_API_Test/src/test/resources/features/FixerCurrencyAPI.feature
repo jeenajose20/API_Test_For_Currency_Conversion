@@ -18,11 +18,11 @@ Scenario: Retrieve conversion rate for a single currency
 Scenario: Request without an API key
     Given I do not provide an API key
     When I request the conversion rates for "USD"
-    Then the response status code should be 200
+    Then the response error code should be 101
     And the response should contain an error message "false"
     
 Scenario: Request with invalid symbols
     Given I have the valid API key
     When I request conversion rates for an "INVALID_CURRENCY"
-    Then the response status code should be 200
+    Then the response error code should be 202
     And the response should contain an error mentioning "false"

@@ -67,6 +67,12 @@ public class FixerCurrencyAPIsteps {
 
 		fixer.generateCurrencyConvertInvalidAPIcall(symbols);
 	}
+	
+	@Then("the response error code should be {int}")
+	public void the_response_error_code_should_be(Integer errorCode) {
+	    fixer.validateInvalidKeyErrorcode(errorCode);
+	}
+
 
 	@Then("the response should contain an error message {string}")
 	public void the_response_should_contain_an_error_message(String expectedError) {
